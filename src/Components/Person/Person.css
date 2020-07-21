@@ -1,0 +1,15 @@
+.person-image-wrapper
+{
+    width: 100%;
+}
+
+.person-image
+{
+    width: 50%;
+}
+
+.person-content
+{
+    border-radius: 5px;
+    background-color: #303033;
+}

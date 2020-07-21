@@ -1,0 +1,18 @@
+.navbar-nav
+{
+    margin-left: 80px;
+}
+
+.nav-item
+{
+    margin-right: 30px;
+}
+
+.h2{
+    margin-bottom: 16px;
+}
+
+.nav-link:focus
+{
+    color: lightseagreen !important;
+}

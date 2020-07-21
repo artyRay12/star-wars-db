@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
+import Header from "./Components/Header/Header";
+import Random from "./Components/Random/Random";
+import ListItem from "./Components/Item-list/ListItem";
+import Person from "./Components/Person/Person";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends Component {
+    
+    state = {
+        selectedItem: null,        
+    };
+
+    onItemSelected = (id) => {
+        this.setState({
+            selectedItem: id
+        })
+    }
+
+
+    render() {
+        console.log('render APP')
+        return (
+            <div className="App container">
+                <Header />
+                <Random />
+                <div className="container d-flex content justify-content-between">
+                    <ListItem onItemSelected={this.onItemSelected}/>
+                    <Person currentItem={this.state.selectedItem}/>
+                </div>
+            </div>
+        );
+    }
 }
-
-export default App;
