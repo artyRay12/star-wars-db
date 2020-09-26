@@ -1,54 +1,32 @@
 import React, { Component } from "react";
 import "./ListItem.css";
-import SwapiService from "../Services/swapi";
 import Loader from "../assets/Loader/Loader";
+import SwapiService from "../Services/swapi";
+import ListItemContainer from "../hoc/with-data";
 
-class ListItem extends Component {
-    swapiService = new SwapiService();
+const ListItem = (props) => {
+    const { itemList, onItemSelected, renderItem } = props;
 
-    state = {
-        itemList: null,
-        isLoaded: false,
-    };
-
-    componentDidMount() {
-        this.swapiService.getAllChars().then((itemList) => {
-            this.setState({
-                itemList,
-            });
-        });
-        console.log("Залупа дид маунт");
-    }
-
-    renderItems = (arr) => {
-        return arr.map((elem) => {
+    const renderItems = (arr) => {
+        return arr.map((item) => {
+            const { id } = item;
+            const label = renderItem(item);
             return (
                 <li
-                    key={elem.id}
+                    key={id}
                     className="list-group-item item-list-link"
-                    onClick={() => this.props.onItemSelected(elem.id)}
+                    onClick={() => onItemSelected(id)}
                 >
-                    {elem.name}
+                    {label}
                 </li>
             );
         });
     };
-
-    render() {
-        const { itemList } = this.state;
-
-        if (!itemList) {
-            return <Loader />;
-        }
-
-        return (
-            <div className="row col-lg-6 col-md-6 list-item-wrapper">
-                <ul class="list-group entity-list">
-                    {this.renderItems(itemList)}
-                </ul>
-            </div>
-        );
-    }
-}
+    return (
+        <div className="row col-lg-6 col-md-6 list-item-wrapper">
+            <ul class="list-group entity-list">{renderItems(itemList)}</ul>
+        </div>
+    );
+};
 
 export default ListItem;

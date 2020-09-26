@@ -7,17 +7,19 @@ export default class SwapiService {
         return await res.json();
     }
 
-    async getAllChars() {
-        return await this.getResource(`people/`).then((data) => this._transformChars(data.results));
-    }
+    getAllChars = async () =>
+        await this.getResource(`people/`).then((data) =>
+            this._transformChars(data.results)
+        );
 
     getChar(id) {
-        return this.getResource(`people/${id}/`).then(data => this._transformChar(data));
+        return this.getResource(`people/${id}/`).then((data) =>
+            this._transformChar(data)
+        );
     }
 
-    async getAllPlanets() {
-        return await this.getResource(`planets/`).then((data) => data.results);
-    }
+    getAllPlanets = async () =>
+        await this.getResource(`planets/`).then((data) => data.results);
 
     async getPlanet(id) {
         return await this.getResource(`planets/${id}/`).then((data) =>
@@ -25,16 +27,13 @@ export default class SwapiService {
         );
     }
 
-    async getAllStarships() {
-        return await this.getResource(`starships/`).then(
-            (data) => data.results
-        );
-    }
+    getAllStarships = async () =>
+        await this.getResource(`starships/`).then((data) => data.results);
 
     getStarship(id) {
         return this.getResource(`starships/${id}/`);
     }
-    
+
     _getId(str) {
         const reg = /\/([0-9]*)\/$/;
         return str.match(reg)[1];
@@ -56,9 +55,8 @@ export default class SwapiService {
             name: char.name,
             gender: char.gender,
             weight: char.mass,
-        }
+        };
     }
 
-
-    _transformChars = (chars) => chars.map(elem => this._transformChar(elem));
+    _transformChars = (chars) => chars.map((elem) => this._transformChar(elem));
 }

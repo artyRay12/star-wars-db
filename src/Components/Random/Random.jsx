@@ -14,7 +14,7 @@ export default class Random extends Component {
 
     componentDidMount() {
         this.updatePlanet();
-        this.interval = setInterval(() => this.updatePlanet, 5000);
+        this.interval = setInterval(() => this.updatePlanet(), 5000);
         console.log("Component did mount");
     }
 
